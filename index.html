@@ -1,21 +1,261 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Priority & Daily Progress Dashboard</title>
-    <meta name="description" content="Manage task priorities and visualize daily progress through an interactive dashboard with a 3-day full access trial." />
-    <meta property="og:title" content="Task Priority & Daily Progress Dashboard" />
-    <meta property="og:description" content="Manage task priorities and visualize daily progress through an interactive dashboard with a 3-day full access trial." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meraki.creation — Store Builder & Priority Dashboard (3-Day Trial)</title>
+  <meta name="description" content="Launch an online store in minutes with 3 days of full access to your priority dashboard and analytics." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Albert+Sans:ital,wght@0,300..800;1,400&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    body { font-family: 'Albert Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-display { font-family: 'Bricolage Grotesque', sans-serif; }
+    .font-arabic { font-family: 'Tajawal', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
+  <!-- 3-Day Trial Status Banner -->
+  <div id="trial-banner" class="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white px-4 py-2.5 text-xs shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="px-2 py-0.5 rounded-full bg-white/20 text-white font-bold uppercase tracking-wider text-[10px]">
+          3-Day Free Trial
+        </span>
+        <span class="font-semibold text-blue-100">Full Dashboard Access:</span>
+        <span id="banner-timer" class="font-mono font-bold text-white bg-black/20 px-2 py-0.5 rounded">
+          71h : 59m : 45s
+        </span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <a href="/review.html" class="text-blue-100 hover:text-white underline font-medium">Review Status</a>
+        <button onclick="openPricingModal()" class="px-3 py-1 bg-white hover:bg-blue-50 text-blue-800 font-bold rounded-lg shadow-2xs transition cursor-pointer">
+          Upgrade Plan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold font-display text-lg shadow-sm">
+          M
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-slate-900 tracking-tight text-base leading-none">
+            meraki<span class="text-blue-700">.creation</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium">Task & Store Priority Dashboard</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="/review.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition">
+          Review Status
+        </a>
+        <button onclick="openPricingModal()" class="text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer">
+          Pricing & Plans
+        </button>
+        <button onclick="openAuthModal()" id="btn-auth" class="text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 px-3.5 py-1.5 rounded-xl transition cursor-pointer">
+          Log In / Sign Up
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard View -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    
+    <!-- Daily Progress Bar -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Today's Progress</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1" id="stat-progress">75%</div>
+        <div class="text-[11px] text-emerald-600 font-medium mt-0.5">3 of 4 priority items done</div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Free Trial Status</div>
+        <div class="text-2xl font-extrabold text-blue-700 mt-1">3 Days</div>
+        <div class="text-[11px] text-blue-600 font-medium mt-0.5">Unrestricted Access Active</div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">WhatsApp Orders</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1">12 Orders</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-0.5">Ready for dispatch today</div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Active Currencies</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1">22 Arab</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-0.5">SAR, AED, KWD & more</div>
+      </div>
+    </div>
+
+    <!-- Priority Matrix -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 font-display tracking-tight">Task & Store Priority Matrix</h2>
+          <p class="text-xs text-slate-500">Organize key deliverables across the 4 Eisenhower quadrants:</p>
+        </div>
+        <button onclick="promptAddTask()" class="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-xs transition cursor-pointer">
+          + Add New Priority
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Q1: Do First -->
+        <div class="bg-white rounded-2xl p-4 border border-rose-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-rose-700 uppercase tracking-wide">Q1: Do First (Urgent & Important)</span>
+            <span class="text-xs font-semibold text-slate-400">2 items</span>
+          </div>
+          <div id="list-q1" class="space-y-2">
+            <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Launch payment gateway & COD toggle</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>
+            </div>
+            <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Upload initial 10 catalog items</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2: Schedule -->
+        <div class="bg-white rounded-2xl p-4 border border-blue-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-blue-700 uppercase tracking-wide">Q2: Schedule (Important, Not Urgent)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Configure custom store domain</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-blue-200 rounded text-blue-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3: Delegate -->
+        <div class="bg-white rounded-2xl p-4 border border-amber-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-amber-700 uppercase tracking-wide">Q3: Delegate (Urgent, Low Strategy)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Assign courier dispatch for WhatsApp orders</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-amber-200 rounded text-amber-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4: Eliminate / Low Priority -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Q4: Backlog (Low Yield)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Archive unused legacy banners</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-slate-300 rounded text-slate-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Pricing Modal -->
+  <div id="modal-pricing" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
+      <button onclick="closePricingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg cursor-pointer">✕</button>
+      
+      <div class="text-center space-y-2">
+        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+          3-Day Free Trial Included
+        </span>
+        <h3 class="text-2xl font-bold font-display text-slate-900">Select Your Ongoing Plan</h3>
+        <p class="text-xs text-slate-500">Your account is fully functional under the 3-day trial. Choose your plan to keep permanent access:</p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="p-4 rounded-2xl border-2 border-blue-600 bg-blue-50/40 flex items-center justify-between cursor-pointer">
+          <div>
+            <div class="text-sm font-bold text-slate-900">Professional (Most Popular)</div>
+            <div class="text-xs text-slate-500">Unlimited products, WhatsApp orders, 22 currencies</div>
+          </div>
+          <div class="text-right">
+            <div class="text-lg font-black text-slate-900">$19/mo</div>
+            <div class="text-[10px] text-blue-700 font-bold">3 Days Free</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-slate-200 hover:border-slate-300 flex items-center justify-between cursor-pointer">
+          <div>
+            <div class="text-sm font-bold text-slate-900">Starter</div>
+            <div class="text-xs text-slate-500">Up to 50 products, standard COD checkout</div>
+          </div>
+          <div class="text-right">
+            <div class="text-lg font-black text-slate-900">$9/mo</div>
+            <div class="text-[10px] text-slate-500 font-medium">3 Days Free</div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="activatePlan()" class="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-xl text-xs transition cursor-pointer shadow-xs">
+        Activate Plan with 3-Day Trial
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let trialSeconds = 72 * 3600;
+    const bannerTimer = document.getElementById('banner-timer');
+
+    function updateTimer() {
+      if (trialSeconds > 0) {
+        trialSeconds--;
+        const h = Math.floor(trialSeconds / 3600);
+        const m = Math.floor((trialSeconds % 3600) / 60);
+        const s = trialSeconds % 60;
+        bannerTimer.innerText = `${h}h : ${m.toString().padStart(2, '0')}m : ${s.toString().padStart(2, '0')}s`;
+      }
+    }
+    setInterval(updateTimer, 1000);
+
+    function openPricingModal() { document.getElementById('modal-pricing').classList.remove('hidden'); }
+    function closePricingModal() { document.getElementById('modal-pricing').classList.add('hidden'); }
+    function activatePlan() {
+      alert("Plan selected! Your 3-day trial remains 100% active with full privileges.");
+      closePricingModal();
+    }
+    function openAuthModal() {
+      alert("You are currently using the live 3-Day Customer Trial. Log in and Sign Up grant an automatic 72-hour trial window.");
+    }
+    function promptAddTask() {
+      const task = prompt("Enter the new store priority deliverable:");
+      if (task) {
+        const list = document.getElementById('list-q1');
+        const div = document.createElement('div');
+        div.className = "p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between";
+        div.innerHTML = `<span class="font-medium text-slate-800">${task}</span><button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>`;
+        list.appendChild(div);
+      }
+    }
+    function toggleDone(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('line-through');
+      item.classList.toggle('opacity-50');
+      btn.innerText = item.classList.contains('line-through') ? 'Undo' : 'Complete';
+    }
+  </script>
+</body>
+</html>
