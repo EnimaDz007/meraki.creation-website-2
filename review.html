@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meraki.creation — 3-Day Trial Review & Verification</title>
+  <title>Meraki.creation — Store Builder & Priority Dashboard (3-Day Trial)</title>
+  <meta name="description" content="Launch an online store in minutes with 3 days of full access to your priority dashboard and analytics." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Albert+Sans:ital,wght@0,300..800;1,400&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -16,265 +17,346 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-  <!-- Navigation Bar -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+  <!-- 3-Day Trial Top Banner -->
+  <div id="trial-banner" class="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white px-4 py-2.5 text-xs shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="px-2 py-0.5 rounded-full bg-white/20 text-white font-bold uppercase tracking-wider text-[10px]">
+          3-Day Free Trial
+        </span>
+        <span class="font-semibold text-blue-100">Full Dashboard Access:</span>
+        <span id="banner-timer" class="font-mono font-bold text-white bg-black/20 px-2 py-0.5 rounded">
+          71h : 59m : 45s
+        </span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <!-- Opens built-in review modal without navigating away -->
+        <button onclick="openReviewModal()" class="text-blue-100 hover:text-white underline font-semibold cursor-pointer">
+          Review Status
+        </button>
+        <button onclick="openPricingModal()" class="px-3 py-1 bg-white hover:bg-blue-50 text-blue-800 font-bold rounded-lg shadow-2xs transition cursor-pointer">
+          Upgrade Plan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="/" class="flex items-center space-x-2.5">
-          <div class="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold font-display text-lg shadow-sm">
-            M
-          </div>
-          <div class="flex flex-col">
-            <span class="font-display font-extrabold text-slate-900 tracking-tight text-base leading-none">
-              meraki<span class="text-blue-700">.creation</span>
-            </span>
-            <span class="text-[10px] text-slate-400 font-medium">3-Day Trial Review Center</span>
-          </div>
-        </a>
+        <div class="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold font-display text-lg shadow-sm">
+          M
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-slate-900 tracking-tight text-base leading-none">
+            meraki<span class="text-blue-700">.creation</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium">Task & Store Priority Dashboard</span>
+        </div>
       </div>
 
       <div class="flex items-center space-x-3">
-        <a href="/" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition">
-          ← Back to Main App
-        </a>
-        <a href="/pricing" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition">
+        <button onclick="openReviewModal()" class="text-xs font-semibold text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition cursor-pointer">
+          Review Status
+        </button>
+        <button onclick="openPricingModal()" class="text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer">
           Pricing & Plans
-        </a>
+        </button>
+        <button onclick="openAuthModal()" class="text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 px-3.5 py-1.5 rounded-xl transition cursor-pointer">
+          Log In / Sign Up
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
+  <!-- Main Dashboard Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
     
-    <!-- Hero Banner with Live Trial Countdown -->
-    <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
-      <div class="space-y-3">
-        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/25 border border-blue-400/30 text-blue-200 text-xs font-bold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>3-Day Trial Verification Live</span>
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-display font-extrabold tracking-tight">
-          Customer 3-Day Trial Status & Review
-        </h1>
-        <p class="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
-          Every customer who logs in or signs up receives <strong>72 hours (3 full days)</strong> of unrestricted dashboard access. Review the countdown, simulate trial stages, and inspect pricing options below.
-        </p>
+    <!-- Daily Progress Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Today's Progress</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1" id="stat-progress">75%</div>
+        <div class="text-[11px] text-emerald-600 font-medium mt-0.5">3 of 4 priority items done</div>
       </div>
 
-      <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 min-w-[260px] text-center">
-        <span class="text-xs text-blue-200 uppercase font-bold tracking-wider">Remaining Free Trial</span>
-        <div id="trial-timer" class="text-3xl font-display font-black text-white my-1 tracking-tight">
-          71h : 58m : 42s
-        </div>
-        <div class="w-full bg-white/20 rounded-full h-2 mt-3 overflow-hidden">
-          <div id="trial-progress" class="bg-emerald-400 h-full rounded-full transition-all duration-500" style="width: 98%;"></div>
-        </div>
-        <p id="trial-status-text" class="text-[11px] text-emerald-300 font-semibold mt-2">Full Dashboard Access Active</p>
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Free Trial Status</div>
+        <div class="text-2xl font-extrabold text-blue-700 mt-1">3 Days</div>
+        <div class="text-[11px] text-blue-600 font-medium mt-0.5">Unrestricted Access Active</div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">WhatsApp Orders</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1">12 Orders</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-0.5">Ready for dispatch today</div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+        <div class="text-xs font-semibold text-slate-500">Active Currencies</div>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1">22 Arab</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-0.5">SAR, AED, KWD & more</div>
       </div>
     </div>
 
-    <!-- Simulator Controller -->
-    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+    <!-- Priority Matrix Section -->
+    <div class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-slate-900 font-display">Test Customer Trial Stages (Interactive Simulator)</h2>
-          <p class="text-xs text-slate-500">Click any stage below to simulate how the store dashboard reacts for that customer:</p>
+          <h2 class="text-lg font-bold text-slate-900 font-display tracking-tight">Task & Store Priority Matrix</h2>
+          <p class="text-xs text-slate-500">Organize key deliverables across the 4 Eisenhower quadrants:</p>
         </div>
-        <span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
-          Simulation Mode
-        </span>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 pt-2">
-        <button onclick="setTrialStage('day1')" id="btn-stage-day1" class="p-3 rounded-xl border border-blue-300 bg-blue-50/70 text-left transition hover:border-blue-400 cursor-pointer">
-          <div class="text-[11px] font-bold text-blue-800">Day 1 (New Signup)</div>
-          <div class="text-xs text-slate-500 mt-0.5">72h Full Access</div>
-        </button>
-
-        <button onclick="setTrialStage('day2')" id="btn-stage-day2" class="p-3 rounded-xl border border-slate-200 bg-white text-left transition hover:border-slate-300 cursor-pointer">
-          <div class="text-[11px] font-bold text-slate-800">Day 2 (Mid Trial)</div>
-          <div class="text-xs text-slate-500 mt-0.5">36h Remaining</div>
-        </button>
-
-        <button onclick="setTrialStage('day3')" id="btn-stage-day3" class="p-3 rounded-xl border border-slate-200 bg-white text-left transition hover:border-slate-300 cursor-pointer">
-          <div class="text-[11px] font-bold text-amber-800">Day 3 (Urgent Alert)</div>
-          <div class="text-xs text-slate-500 mt-0.5">&lt;6h Alert Banner</div>
-        </button>
-
-        <button onclick="setTrialStage('expired')" id="btn-stage-expired" class="p-3 rounded-xl border border-slate-200 bg-white text-left transition hover:border-slate-300 cursor-pointer">
-          <div class="text-[11px] font-bold text-rose-700">Trial Expired</div>
-          <div class="text-xs text-slate-500 mt-0.5">Paywall Triggered</div>
-        </button>
-
-        <button onclick="setTrialStage('pro')" id="btn-stage-pro" class="p-3 rounded-xl border border-slate-200 bg-white text-left transition hover:border-slate-300 cursor-pointer">
-          <div class="text-[11px] font-bold text-purple-800">Subscribed (Pro)</div>
-          <div class="text-xs text-slate-500 mt-0.5">Permanent Access</div>
+        <button onclick="promptAddTask()" class="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-xs transition cursor-pointer">
+          + Add New Priority
         </button>
       </div>
 
-      <div id="sim-feedback" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-center justify-between">
-        <span>Active State: <strong>Day 1 (72 Hours Full Trial)</strong></span>
-        <button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">
-          Reset to 72 Hours
-        </button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Q1: Do First -->
+        <div class="bg-white rounded-2xl p-4 border border-rose-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-rose-700 uppercase tracking-wide">Q1: Do First (Urgent & Important)</span>
+            <span class="text-xs font-semibold text-slate-400">2 items</span>
+          </div>
+          <div id="list-q1" class="space-y-2">
+            <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Launch payment gateway & COD toggle</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>
+            </div>
+            <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Upload initial 10 catalog items</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2: Schedule -->
+        <div class="bg-white rounded-2xl p-4 border border-blue-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-blue-700 uppercase tracking-wide">Q2: Schedule (Important, Not Urgent)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Configure custom store domain</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-blue-200 rounded text-blue-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3: Delegate -->
+        <div class="bg-white rounded-2xl p-4 border border-amber-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-amber-700 uppercase tracking-wide">Q3: Delegate (Urgent, Low Strategy)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Assign courier dispatch for WhatsApp orders</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-amber-200 rounded text-amber-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4: Eliminate -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Q4: Backlog (Low Yield)</span>
+            <span class="text-xs font-semibold text-slate-400">1 item</span>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs flex items-center justify-between">
+              <span class="font-medium text-slate-800">Archive unused legacy graphic banners</span>
+              <button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-slate-300 rounded text-slate-700 cursor-pointer">Complete</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Review Checklist & Technical Specifications -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-        <h3 class="font-display font-bold text-base text-slate-900 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
-          <span>Customer Access Rules</span>
-        </h3>
-        <ul class="space-y-2.5 text-xs text-slate-600">
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-600 font-bold">✓</span>
-            <span><strong>Zero Friction Signup:</strong> Customer creates an account with email & password. No credit card required.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-600 font-bold">✓</span>
-            <span><strong>Instant 72-Hour Access:</strong> Trial timestamp is initialized immediately upon account creation.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-600 font-bold">✓</span>
-            <span><strong>Banner Notification:</strong> Live countdown displays on all dashboard pages with remaining time.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-600 font-bold">✓</span>
-            <span><strong>Day 3 Grace Period:</strong> At &lt;12 hours remaining, reminders prompt customer to pick an ongoing plan.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-        <h3 class="font-display font-bold text-base text-slate-900 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">★</span>
-          <span>Store Builder Features In Trial</span>
-        </h3>
-        <ul class="space-y-2.5 text-xs text-slate-600">
-          <li class="flex items-start space-x-2">
-            <span class="text-blue-600 font-bold">•</span>
-            <span><strong>Priority Matrix:</strong> Eisenhower 4-quadrant organization for orders, catalog, and store launch.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-blue-600 font-bold">•</span>
-            <span><strong>Arab Currency Engine:</strong> 22 Arab currencies supported (SAR, AED, KWD, EGP, etc.).</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-blue-600 font-bold">•</span>
-            <span><strong>WhatsApp Orders:</strong> Direct checkout orders sent straight to merchant's WhatsApp.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-blue-600 font-bold">•</span>
-            <span><strong>Cash on Delivery (COD):</strong> Native checkout without requiring external payment gateway approvals.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Quick Action Launch Buttons -->
-    <div class="p-6 rounded-3xl bg-blue-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
-      <div>
-        <h4 class="font-display font-bold text-lg">Launch Dashboard</h4>
-        <p class="text-blue-100 text-xs mt-0.5">Open the working dashboard with active 3-day trial privileges.</p>
-      </div>
-
-      <div class="flex items-center space-x-3">
-        <a href="/" class="px-5 py-2.5 bg-white text-blue-700 hover:bg-blue-50 font-bold text-xs rounded-xl shadow-xs transition">
-          Open Live Dashboard →
-        </a>
-        <a href="/pricing" class="px-4 py-2.5 bg-blue-800 hover:bg-blue-900 text-white font-semibold text-xs rounded-xl border border-blue-600 transition">
-          View Pricing Page
-        </a>
-      </div>
-    </div>
-
   </main>
 
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-    <p>Meraki.creation • 3-Day Customer Trial Verification Center • Ready for Vercel</p>
-  </footer>
+  <!-- ======================================================== -->
+  <!-- BUILT-IN REVIEW STATUS MODAL (No 404 error) -->
+  <!-- ======================================================== -->
+  <div id="modal-review" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeReviewModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl font-bold cursor-pointer">✕</button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center space-x-3 border-b border-slate-100 pb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">
+          ✓
+        </div>
+        <div>
+          <h3 class="text-xl font-bold font-display text-slate-900">3-Day Trial Status & Review Center</h3>
+          <p class="text-xs text-slate-500">Real-time status for customers who sign up or log in</p>
+        </div>
+      </div>
+
+      <!-- Live Trial Box -->
+      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] text-blue-300 uppercase font-bold tracking-wider">Active Customer Access</span>
+          <div class="text-2xl font-bold font-display text-white mt-0.5">3-Day Full Access Trial</div>
+          <p class="text-xs text-blue-200 mt-1">Unlimited dashboard, priorities, and store builder tools</p>
+        </div>
+        <div class="bg-white/10 px-4 py-3 rounded-xl border border-white/20 text-center min-w-[170px]">
+          <div class="text-[10px] text-blue-200 uppercase font-bold">Time Remaining</div>
+          <div id="review-timer" class="text-xl font-bold font-mono text-white mt-0.5">71h : 59m</div>
+          <div class="text-[10px] text-emerald-300 font-semibold mt-1">● Active State</div>
+        </div>
+      </div>
+
+      <!-- Feature Checklist -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+          <div class="font-bold text-slate-800 flex items-center space-x-1.5">
+            <span class="text-emerald-600">✓</span>
+            <span>Zero-Friction Signup</span>
+          </div>
+          <p class="text-slate-500 text-[11px]">Customers receive 72h full access instantly without credit card entry.</p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+          <div class="font-bold text-slate-800 flex items-center space-x-1.5">
+            <span class="text-emerald-600">✓</span>
+            <span>Payment & COD Active</span>
+          </div>
+          <p class="text-slate-500 text-[11px]">Mada, Apple Pay, Tabby, and Cash on Delivery toggle ready.</p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+          <div class="font-bold text-slate-800 flex items-center space-x-1.5">
+            <span class="text-emerald-600">✓</span>
+            <span>Priority Matrix Q1-Q4</span>
+          </div>
+          <p class="text-slate-500 text-[11px]">Eisenhower task organization with instant task completion.</p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+          <div class="font-bold text-slate-800 flex items-center space-x-1.5">
+            <span class="text-emerald-600">✓</span>
+            <span>22 Arab Currencies</span>
+          </div>
+          <p class="text-slate-500 text-[11px]">Full multi-currency settlement (SAR, AED, KWD, EGP, etc.).</p>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="flex items-center justify-between border-t border-slate-100 pt-4">
+        <button onclick="closeReviewModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer">
+          Close Review
+        </button>
+        <button onclick="closeReviewModal(); openPricingModal();" class="px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow-xs transition cursor-pointer">
+          View Upgrade Options →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Modal -->
+  <div id="modal-pricing" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
+      <button onclick="closePricingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg cursor-pointer">✕</button>
+      
+      <div class="text-center space-y-2">
+        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+          3-Day Free Trial Included
+        </span>
+        <h3 class="text-2xl font-bold font-display text-slate-900">Select Your Ongoing Plan</h3>
+        <p class="text-xs text-slate-500">Your account is fully functional under the 3-day trial:</p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="p-4 rounded-2xl border-2 border-blue-600 bg-blue-50/40 flex items-center justify-between cursor-pointer">
+          <div>
+            <div class="text-sm font-bold text-slate-900">Professional (Most Popular)</div>
+            <div class="text-xs text-slate-500">Unlimited products, WhatsApp orders, 22 currencies</div>
+          </div>
+          <div class="text-right">
+            <div class="text-lg font-black text-slate-900">$19/mo</div>
+            <div class="text-[10px] text-blue-700 font-bold">3 Days Free</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-slate-200 hover:border-slate-300 flex items-center justify-between cursor-pointer">
+          <div>
+            <div class="text-sm font-bold text-slate-900">Starter</div>
+            <div class="text-xs text-slate-500">Up to 50 products, standard COD checkout</div>
+          </div>
+          <div class="text-right">
+            <div class="text-lg font-black text-slate-900">$9/mo</div>
+            <div class="text-[10px] text-slate-500 font-medium">3 Days Free</div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="activatePlan()" class="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-xl text-xs transition cursor-pointer shadow-xs">
+        Activate Plan with 3-Day Trial
+      </button>
+    </div>
+  </div>
 
   <script>
-    let remainingSeconds = 72 * 3600 - 68;
-    let timerInterval = null;
+    let trialSeconds = 72 * 3600;
+    const bannerTimer = document.getElementById('banner-timer');
+    const reviewTimer = document.getElementById('review-timer');
 
-    function formatTime(totalSec) {
-      if (totalSec <= 0) return "00h : 00m : 00s";
-      const h = Math.floor(totalSec / 3600);
-      const m = Math.floor((totalSec % 3600) / 60);
-      const s = totalSec % 60;
-      return `${h}h : ${m.toString().padStart(2, '0')}m : ${s.toString().padStart(2, '0')}s`;
+    function updateTimer() {
+      if (trialSeconds > 0) {
+        trialSeconds--;
+        const h = Math.floor(trialSeconds / 3600);
+        const m = Math.floor((trialSeconds % 3600) / 60);
+        const s = trialSeconds % 60;
+        const timeStr = `${h}h : ${m.toString().padStart(2, '0')}m : ${s.toString().padStart(2, '0')}s`;
+        if (bannerTimer) bannerTimer.innerText = timeStr;
+        if (reviewTimer) reviewTimer.innerText = `${h}h : ${m.toString().padStart(2, '0')}m`;
+      }
+    }
+    setInterval(updateTimer, 1000);
+
+    // Modal Handlers
+    function openReviewModal() {
+      document.getElementById('modal-review').classList.remove('hidden');
+    }
+    function closeReviewModal() {
+      document.getElementById('modal-review').classList.add('hidden');
     }
 
-    function updateDisplay() {
-      const timerEl = document.getElementById('trial-timer');
-      const progressEl = document.getElementById('trial-progress');
-      const statusText = document.getElementById('trial-status-text');
+    function openPricingModal() {
+      document.getElementById('modal-pricing').classList.remove('hidden');
+    }
+    function closePricingModal() {
+      document.getElementById('modal-pricing').classList.add('hidden');
+    }
 
-      timerEl.innerText = formatTime(remainingSeconds);
-      const totalSec = 72 * 3600;
-      const pct = Math.max(0, Math.min(100, (remainingSeconds / totalSec) * 100));
-      progressEl.style.width = pct + '%';
+    function activatePlan() {
+      alert("Plan selected! Your 3-day trial remains active with full dashboard access.");
+      closePricingModal();
+    }
 
-      if (remainingSeconds <= 0) {
-        statusText.innerText = 'Trial Expired — Paywall Active';
-        statusText.className = 'text-[11px] text-rose-300 font-semibold mt-2';
-        progressEl.className = 'bg-rose-500 h-full rounded-full transition-all duration-500';
-      } else if (remainingSeconds < 12 * 3600) {
-        statusText.innerText = 'Trial Ending Soon (<12h)';
-        statusText.className = 'text-[11px] text-amber-300 font-semibold mt-2';
-        progressEl.className = 'bg-amber-400 h-full rounded-full transition-all duration-500';
-      } else {
-        statusText.innerText = 'Full Dashboard Access Active';
-        statusText.className = 'text-[11px] text-emerald-300 font-semibold mt-2';
-        progressEl.className = 'bg-emerald-400 h-full rounded-full transition-all duration-500';
+    function openAuthModal() {
+      alert("3-Day Customer Trial Active: Signing up or logging in provides an automatic 72-hour unrestricted trial.");
+    }
+
+    function promptAddTask() {
+      const task = prompt("Enter new priority task:");
+      if (task) {
+        const list = document.getElementById('list-q1');
+        const div = document.createElement('div');
+        div.className = "p-3 bg-rose-50/50 rounded-xl border border-rose-100 text-xs flex items-center justify-between";
+        div.innerHTML = `<span class="font-medium text-slate-800">${task}</span><button onclick="toggleDone(this)" class="text-[10px] font-bold px-2 py-1 bg-white border border-rose-200 rounded text-rose-700 cursor-pointer">Complete</button>`;
+        list.appendChild(div);
       }
     }
 
-    function setTrialStage(stage) {
-      const fb = document.getElementById('sim-feedback');
-      ['day1', 'day2', 'day3', 'expired', 'pro'].forEach(id => {
-        const btn = document.getElementById('btn-stage-' + id);
-        if (btn) btn.className = 'p-3 rounded-xl border border-slate-200 bg-white text-left transition hover:border-slate-300 cursor-pointer';
-      });
-
-      const activeBtn = document.getElementById('btn-stage-' + stage);
-      if (activeBtn) activeBtn.className = 'p-3 rounded-xl border border-blue-400 bg-blue-50/80 text-left transition shadow-xs cursor-pointer';
-
-      if (stage === 'day1') {
-        remainingSeconds = 72 * 3600;
-        fb.innerHTML = '<span>Simulating: <strong>Day 1 (72 Hours Full Access)</strong></span><button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">Reset</button>';
-      } else if (stage === 'day2') {
-        remainingSeconds = 36 * 3600;
-        fb.innerHTML = '<span>Simulating: <strong>Day 2 (36 Hours Left - Mid Trial)</strong></span><button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">Reset</button>';
-      } else if (stage === 'day3') {
-        remainingSeconds = 5 * 3600 + 24 * 60;
-        fb.innerHTML = '<span>Simulating: <strong>Day 3 (<6 Hours Left - Urgent Warning)</strong></span><button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">Reset</button>';
-      } else if (stage === 'expired') {
-        remainingSeconds = 0;
-        fb.innerHTML = '<span>Simulating: <strong>Trial Expired (Paywall Locked)</strong></span><button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">Reset</button>';
-      } else if (stage === 'pro') {
-        remainingSeconds = 30 * 24 * 3600;
-        fb.innerHTML = '<span>Simulating: <strong>Subscribed Plan Active (Paid Pro Tier)</strong></span><button onclick="resetTrial()" class="text-blue-700 hover:text-blue-900 font-bold underline cursor-pointer">Reset</button>';
-      }
-      updateDisplay();
+    function toggleDone(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('line-through');
+      item.classList.toggle('opacity-50');
+      btn.innerText = item.classList.contains('line-through') ? 'Undo' : 'Complete';
     }
-
-    function resetTrial() {
-      setTrialStage('day1');
-    }
-
-    timerInterval = setInterval(() => {
-      if (remainingSeconds > 0) {
-        remainingSeconds--;
-        updateDisplay();
-      }
-    }, 1000);
-
-    updateDisplay();
   </script>
 </body>
 </html>
